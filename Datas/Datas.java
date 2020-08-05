@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class Datas {
 	Calendar dataLimite;
 
-	public void setdata(String data) {
+	public boolean setdata(String data) {
 
 		try {																	//Início do bloco try catch
 			for (int i = 0; i < data.length(); i++) {							
@@ -29,8 +29,10 @@ public class Datas {
 			this.dataLimite = Calendar.getInstance();							//Recupera a instância de calendário;
 			this.dataLimite.set(Calendar.DAY_OF_MONTH, arrayDiaEMes[0]);		//Atribui o valor inteiro pro dia no calendário;
 			this.dataLimite.set(Calendar.MONTH, arrayDiaEMes[1]);				//Atribui o valor inteiro pro mês no calendário;
+			return true;
 		} catch (Exception e) {													//Captura o erro e mostra na tela;
 			System.err.println("ERRO!! Digite uma data valida (Ex.: 30/12)");
+			return false;
 		}
 
 	}
@@ -44,6 +46,10 @@ public class Datas {
 
 	public Datas(String data) {
 		setdata(data);
+	}
+	
+	public Datas() {
+		
 	}
 
 }

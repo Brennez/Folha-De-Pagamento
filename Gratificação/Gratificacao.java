@@ -33,8 +33,10 @@ public abstract class Gratificacao {
 		return dataTrabalhada;
 	}
 
-	public void setDataTrabalhada(String dataTrabalhada) {
-		this.dataTrabalhada.setdata(dataTrabalhada);
+	public boolean setDataTrabalhada(String dataTrabalhada) {
+		if(this.dataTrabalhada.setdata(dataTrabalhada))
+			return true;
+		return false;
 	}
 
 	public TipoGratificacao getTipo() {

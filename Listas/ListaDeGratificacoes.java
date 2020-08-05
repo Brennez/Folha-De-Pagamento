@@ -3,6 +3,7 @@ package Listas;
 import java.util.HashMap;
 import java.util.Map;
 
+import Datas.Datas;
 import Empregado.Empregado;
 import Gratificação.GratDesempenho;
 import Gratificação.GratHoraExtra;
@@ -15,7 +16,7 @@ public class ListaDeGratificacoes {
 	 * Vencimento para relacionar a lista de empregados com sua lista de
 	 * vencimentos;
 	 */
-
+	private static Datas dataTest = new Datas();
 	private static Map<Empregado, Vencimento> listaDeGratificacoes;
 
 	// Criando o get do mapa de empregado / vencimento;
@@ -29,61 +30,59 @@ public class ListaDeGratificacoes {
 		Vencimento v;
 		Empregado e = ListaDeFuncionario.recuperaEmpregado(index_funcionario);
 
-		// Condição para testar se a lista de gratificações não está vazia, se tiver
-
 		if (listaDeGratificacoes == null) {
 			listaDeGratificacoes = new HashMap<>();
 		}
-
-		v = (Vencimento) listaDeGratificacoes.get(e);
-		v.adicionaNaLista(new GratDesempenho(e.getSalarioBase(), data_trabalhada));
-
-		return true;
+		
+		if(dataTest.setdata(data_trabalhada)) {
+			v = (Vencimento) listaDeGratificacoes.get(e);
+			v.adicionaNaLista(new GratDesempenho(e.getSalarioBase(), data_trabalhada));
+			return true;
+		}
+		return false;
 
 	}
-	
-	//Método que recupera uma gratificação, passando como parâmetro o index do funcionário e o index da gratificação desejada;
+
+	// Método que recupera uma gratificação, passando como parâmetro o index do
+	// funcionário e o index da gratificação desejada;
 	public static Gratificacao recuperaGratificacao(int index_funcionario, int index_gratificacao) {
 		Empregado e = ListaDeFuncionario.getListaDeEmpregados().get(index_funcionario);
 		Vencimento v = (Vencimento) listaDeGratificacoes.get(e);
 		Gratificacao g = v.recuperaDaLista(index_gratificacao);
-		
-		//Condição para testar se o objeto de gratificação for nulo;
+
+		// Condição para testar se o objeto de gratificação for nulo;
 		if (g == null)
 			System.err.println("Gratificacao Inexistente");
 		return g;
 	}
-	
+
 	/*
-	 * Método que adiciona uma gratificação por Hora extra ao funcionário, passando como parâmtro index do funcionário,
-	 * a data trabalhada, e quantidade e horas extras trabalhadas;
+	 * Método que adiciona uma gratificação por Hora extra ao funcionário, passando
+	 * como parâmtro index do funcionário, a data trabalhada, e quantidade e horas
+	 * extras trabalhadas;
 	 */
-	
+
 	public static boolean adicionaGratificacao(int index_funcionario, String data_trabalhada, int horas_trabalhadas) {
 		Vencimento v;
 		Empregado e = ListaDeFuncionario.recuperaEmpregado(index_funcionario);
-		
-		//Condição para testar se a lista de gratificações é nula, se for crie;
+
 		if (listaDeGratificacoes == null) {
 			listaDeGratificacoes = new HashMap<>();
 		}
-		
-		//Condição para testar se a lista de gratificações não contêm o objeto de empregado;
-		if (!listaDeGratificacoes.containsKey(e)) {
-			v = new Vencimento();
-			v.adicionaNaLista(new GratHoraExtra(e.getSalarioBase(), data_trabalhada, horas_trabalhadas));
-			listaDeGratificacoes.put(e, v);
-			
-		} else {
+
+		if (horas_trabalhadas > 0 && dataTest.setdata(data_trabalhada)) {
 			v = (Vencimento) listaDeGratificacoes.get(e);
 			v.adicionaNaLista(new GratHoraExtra(e.getSalarioBase(), data_trabalhada, horas_trabalhadas));
+			return true;
+		} else if (horas_trabalhadas <= 0) {
+			System.out.println("VERIFIQUE O AS HORAS TRABALHADAS");
 		}
-
-		return true;
+		return false;
 
 	}
-	
-	//Remove uma gratificação atribuída a um empregado, passando como parâmtero o index do funcionário e o index da gratificação a ser removida;
+
+	// Remove uma gratificação atribuída a um empregado, passando como parâmtero o
+	// index do funcionário e o index da gratificação a ser removida;
 	public static boolean removeGratificacao(int index_funcionario, int index_gratificacao) {
 		if (!listaDeGratificacoes.isEmpty() || listaDeGratificacoes != null) {
 			Empregado e = ListaDeFuncionario.getListaDeEmpregados().get(index_funcionario);
@@ -93,14 +92,14 @@ public class ListaDeGratificacoes {
 		}
 		return false;
 	}
-	
-	//Método que mostra um empregado contida na lista de funcionários;
+
+	// Método que mostra um empregado contida na lista de funcionários;
 	public static void mostraLista(int index_funcionario) {
 		Empregado e = ListaDeFuncionario.recuperaEmpregado(index_funcionario);
 		Vencimento v = listaDeGratificacoes.get(e);
 		v.recuperaListaDeGratificacao();
 	}
-	
+
 	/*
 	 * Método que mostra a folha de pagamento completa, com o nome do funcionário,
 	 * cargo, salário Base, qtd. de gratificações e o valor das gratificações;
@@ -136,8 +135,8 @@ public class ListaDeGratificacoes {
 
 		}
 	}
-	
-	//Método vai referenciar um empregado a sua lista de gratificações;
+
+	// Método vai referenciar um empregado a sua lista de gratificações;
 	public static void criaEmpregado(Empregado e, Vencimento v) {
 		if (listaDeGratificacoes == null) {
 			listaDeGratificacoes = new HashMap<>();

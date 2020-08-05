@@ -1,6 +1,6 @@
 package Interface_de_usuário;
 
-import java.util.InputMismatchException;
+
 import java.util.Scanner;
 
 import Empregado.Empregado;
@@ -12,103 +12,119 @@ import Listas.ListaDeGratificacoes;
 public class IU {
 	
 	//Criando os atributos de leitura do teclado e nome;
-	private static Scanner ler;
-
-	private static String nome;
+	private static Scanner ler;											
+	private static String leitura;
+	
+	/*
+	 * "SubMenu Funcionario e Gratificacao"
+	 * 
+	 * + Recupera Dados 
+	 * + Atualiza Dados 
+	 * + Mostra Lista de Gratificacao 
+	 * + Adiciona
+	 * + Gratificacao 
+	 * 		= Hora Extra 
+	 * 		= Desemprenho
+	 * + Remove Gratificacao // passa o indice da gratificacao 
+	 * + Atualiza Gratificacao
+	 * + Voltar
+	 */
 	
 	//Menu Principal que irá ser exibido;
 	private static void menuPrincipal() {
-		System.out.println("\n\n------ MENU DE PRINCIPAL ------");
+		System.out.println("\n\n------ MENU DE PRINCIPAL ------\n");
 		System.out.println("[1] Menu de empregados");
 		System.out.println("[2] Folha de pagamento");
-		System.out.println("[0] SAIR");
-		System.out.print("Digite sua opção: ");
+		System.out.println("[0] Sair");
+		System.out.print("\nDigite sua opção: ");
 	}
-	
+
 	//Menu de funcionário que irá ser exibido;
 	private static void menuDeFuncionario() {
 
-		System.out.println("\n\n------ MENU DE EMPREGADO ------");
+		System.out.println("\n\n------ MENU DE EMPREGADO ------\n");
 		System.out.println("[1] Recupera lista de empregados");
 		System.out.println("[2] Acessar Empregado");
 		System.out.println("[3] Cadastrar Novo Empregado");
-		System.out.println("[0] Voltar ao menu anterior\n");
+		System.out.println("[0] Voltar ao menu anterior");
 
-		System.out.print("Digite sua opção: ");
+		System.out.print("\nDigite sua opção: ");
 
 	}
-
 
 	//Sub menu de funcionário que irá ser exibido;
 	private static void subMenuDeFuncionario(Empregado e) {
 
-		System.out.println("\n\n------ MENU DO EMPREGADO " + e.getNome() + " ------");
+		System.out.println("\n\n------ MENU DO EMPREGADO " + e.getNome() + " ------\n");
 		System.out.println("[1] Recupera Dados");
 		System.out.println("[2] Atualiza Dados");
-		System.out.println("[3] Mostrar Lista de Gratificao");
-		System.out.println("[4] Adicionar Gratificacao");
-		System.out.println("[5] Excluir Gratificacao");
+		System.out.println("[3] Mostrar Lista de Gratificação");
+		System.out.println("[4] Adicionar Gratificação");
+		System.out.println("[5] Excluir Gratificação");
 		System.out.println("[6] Excluir Empregado");
-		System.out.println("[7] Atualizar Gratificacao");
-		System.out.println("[0] Voltar ao menu anterior\n");
+		System.out.println("[7] Atualizar Gratificação");
+		System.out.println("[0] Voltar ao menu anterior");
 
-		System.out.print("Digite sua opção: ");
+		System.out.print("\nDigite sua opção: ");
 
 	}
 
-	@SuppressWarnings("unused")
-	//Menu de Gratificação  que irá ser exibido;
-	private static void menuDeGratificacao() {
-		System.out.println("\n\n------ MENU DE GRATIFICAÇÃO ------");
-		System.out.println("[1] Cadastrar Nova Gratificacao");
-		System.out.println("[2] Atualiza Gratificao");
-		System.out.println("[3] Recupera Lista de um Empregado");
-		System.out.println("[3] Recupera Lista Completa");
-		System.out.println("[0] Voltar ao menu anterior\n");
-		System.out.print("Digite sua opção: ");
-	}
+
+
 	
 	//Criando o menu d que irá atualizar uma gratificação;
-	private static void menuAtualizaGratificacao(int index_empregado, int index_gratificacao,TipoGratificacao tp) {
+	private static void menuAtualizaGratificacao(TipoGratificacao tp) {
 
-		Gratificacao g = ListaDeGratificacoes.recuperaGratificacao(index_empregado, index_gratificacao);
-		
 		//Condição para saber se a gratificação é por desmepenho ou por hora extra;
-		if (g.getTipo().equals(TipoGratificacao.Desempenho)) {
-			System.out.println("\n\n------ MENU DE ATUALIZAÇÃO ------");
-			System.out.println("[1] Atualiza data e hora trabalhada");
-			System.out.println("[3] Atualiza data trabalhada");
-			System.out.println("[3] Atualiza hora trabalhada");
-			System.out.println("[0] Voltar ao menu anterior\n");
-			System.out.print("Digite sua opção: ");
-		} else {
-			System.out.println("\n\n------ MENU DE ATUALIZAÇÃO ------");
+		if (tp == TipoGratificacao.Hora_extra) {
+			System.out.println("\n\n------ MENU DE ATUALIZAÇÃO ------\n");
 			System.out.println("[1] Atualiza data trabalhada");
-			System.out.println("[0] Voltar ao menu anterior\n");
-			System.out.print("Digite sua opção: ");
+			System.out.println("[2] Atualiza hora trabalhada");
+			System.out.println("[3] Atualiza data e hora trabalhada");
+			System.out.println("[0] Voltar ao menu anterior");
+			System.out.print("\nDigite sua opção: ");
+		} else {
+			System.out.println("\n\n------ MENU DE ATUALIZAÇÃO ------\n");
+			System.out.println("[1] Atualiza data trabalhada");
+			System.out.println("[0] Voltar ao menu anterior");
+			System.out.print("\nDigite sua opção: ");
 		}
 
 	}
-	
-	
+
 	//Menu que atualiza funcionário que irá ser exibido;
 	private static void menuAtualizaFuncionario() {
 
-		System.out.println("\n\n------ MENU DE ATUALIZAÇÃO ------");
+		System.out.println("\n\n------ MENU DE ATUALIZAÇÃO ------\n");
 		System.out.println("[1] Atualiza nome e salário");
 		System.out.println("[2] Atualiza nome");
 		System.out.println("[3] Atualiza salário");
-		System.out.println("[0] Voltar ao menu anterior\n");
-		System.out.print("Digite sua opção: ");
+		System.out.println("[0] Voltar ao menu anterior");
+		System.out.print("\nDigite sua opção: ");
 	}
-	
+
 	//Criando a interface de usuário principal;
 	public static void IUPrincipal() {
 		int op;
 		ler = new Scanner(System.in);
+
 		do {
-			menuPrincipal();
-			op = ler.nextInt();
+			menuPrincipal();											//Chama o print do menu com suas opções 
+			try {
+				leitura = ler.next();
+				for (int i = 0; i < leitura.length(); i++) {
+					Character caractere = leitura.charAt(i);
+					if (!(Character.isDigit(caractere))) {
+						throw new Exception();
+					}
+				}
+				op = Integer.valueOf(leitura);
+			} catch (Exception e) {
+				System.err.println("\nDigite apenas números");
+				op = 99;
+				leitura = "erro";
+			}	
+			
 			switch (op) {
 			case 1:
 				IUdeFuncionario();
@@ -120,12 +136,13 @@ public class IU {
 				System.err.println("Saindo .....");
 				break;
 			default:
-				System.out.println("Opção inválida, digite novamente.");
+				if(!leitura.equals("erro"))
+					System.out.println("\nOpção inválida, digite novamente.");
 				break;
 			}
 		} while (op != 0);
 	}
-	
+
 	//Criando a interface de usuário que irá fazer as modificações possíveis em um empregado;
 	public static void IUdeFuncionario() {
 		ler = new Scanner(System.in);
@@ -133,50 +150,65 @@ public class IU {
 
 		do {
 			menuDeFuncionario();
-			opf = ler.nextInt();
+			
+			try {
+				leitura = ler.next();
+				for (int i = 0; i < leitura.length(); i++) {
+					Character caractere = leitura.charAt(i);
+					if (!(Character.isDigit(caractere))) {
+						throw new Exception();
+					}
+				}
+				opf = Integer.valueOf(leitura);
+			} catch (Exception e) {
+				System.err.println("\nDigite apenas números");
+				opf = 99;
+				leitura = "erro";
+			}
 
 			switch (opf) {
 
 			case 1:
-				/*
-				 * bloco try catch para tratar a exceção caso a lista de funcionários 
-				 * não tenha nenhum funcionário cadastrado ainda;
-				 */
-				try {
-					ListaDeFuncionario.recuperaListaDeEmpregados();
-				} catch (Exception e) {
-					System.err.println("\nErro! Não existe lista de funcionários\n");
-					System.out.println("Cadastre um funcionário\n");
-					IUdeFuncionario();
-				}
+
+				ListaDeFuncionario.recuperaListaDeEmpregados();
+
 				break;
 
 			case 2:
-				/*
-				 * Bloco try catch para tratar a exceção caso o usuário digite uma letra ou algo que não seja um  número;
-				 */
-				try {
-					System.out.print("Digite o índice do empregado a ser acessado: ");
-					int ep = ler.nextInt();
-					IUSubFuncionario(ep);
-				} catch (InputMismatchException e) {
-					System.err.println("Erro!! Insira apenas números...");
-				}
-				
+
+				System.out.print("Digite o índice do empregado a ser acessado: ");
+				int ep = ler.nextInt();
+				IUSubFuncionario(ep);
 				break;
+
 			//opção em caso de execução de um cadastro de empregado;
 			case 3:
-
+				String nome;
 				String cargo = "";
 				int f = 1;
 
 				while (true) {
-					
 					System.out.println("------ MENU DE CADASTRO ------");
 					System.out.println("[1] Funcionário");
 					System.out.println("[2] Gerente");
 					System.out.print("Cargo: ");
-					int c = ler.nextInt();
+					int c;
+					
+					try {
+						leitura = ler.next();
+						for (int i = 0; i < leitura.length(); i++) {
+							Character caractere = leitura.charAt(i);
+							if (!(Character.isDigit(caractere))) {
+								throw new Exception();
+							}
+						}
+						c = Integer.valueOf(leitura);
+					} catch (Exception e) {
+						System.err.println("\nDigite apenas números");
+						c = 99;
+						leitura = "erro";
+					}
+					
 					switch (c) {
 					case 1:
 						cargo = "Funcionário";
@@ -187,20 +219,18 @@ public class IU {
 						f = 0;
 						break;
 					default:
-						System.err.println("Opcão inválida");
+						if(!leitura.equals("erro"))
+							System.out.println("\nOpção inválida, digite novamente.");
 						break;
 					}
-					if (f == 0) //condicional para sair do laço infinito;
+					if (f == 0)		//condicional para sair do laço infinito;
 						break;
 				}
-				
 				while (true) {
 					
-					/*
-					 * Bloco try catch para tratar a exceção caso o usuário digite algo que não seja letras; 
-					 */
+					//Bloco try catch para tratar a exceção caso o usuário digite algo que não seja letras; 
 					try {
-						System.out.print("\n\nNome: ");
+						System.out.print("\nNome: ");
 						nome = ler.next();
 						for (int i = 0; i < nome.length(); i++) {
 							Character caractere = nome.charAt(i);
@@ -209,11 +239,11 @@ public class IU {
 							}
 						}
 						ListaDeFuncionario.cadastraEmpregado(nome, cargo);
-						System.out.println("EMPREGADO CADASTRADO COM SUCESSO...");
+						System.out.println("\nEMPREGADO CADASTRADO");
 						break;
 					} catch (Exception e) {
 						System.err.println(
-								"\nErro!!\n Verifique se o nome está correto (Sem números)\nVerifique se o cargo existe");
+								"\nErro!!\n Verifique se o nome está correto (Sem números)");
 					}
 				}
 
@@ -222,11 +252,12 @@ public class IU {
 			case 0:
 				break;
 			default:
-				System.out.println("Opção inválida, digite novamente: ");
+				if(!leitura.equals("erro"))
+					System.out.println("\nOpção inválida, digite novamente.");
 				break;
 
 			}
-		} while (opf != 0); //condição para sair do laço infinito;
+		} while (opf != 0);		//condição para sair do laço infinito;
 	}
 	
 	//Criando sub interface de usuário, na qual mostra as opções possíveis de um empregado;
@@ -238,7 +269,20 @@ public class IU {
 			int ops;
 			do {
 				subMenuDeFuncionario(e);
-				ops = ler.nextInt();
+				try {
+					leitura = ler.next();
+					for (int i = 0; i < leitura.length(); i++) {
+						Character caractere = leitura.charAt(i);
+						if (!(Character.isDigit(caractere))) {
+							throw new Exception();
+						}
+					}
+					ops = Integer.valueOf(leitura);
+				} catch (Exception erro) {
+					System.err.println("\nDigite apenas números");
+					ops = 99;
+					leitura = "erro";
+				}
 
 				switch (ops) {
 				case 1:
@@ -251,30 +295,46 @@ public class IU {
 				case 3:
 					ListaDeGratificacoes.mostraLista(ep);
 					break;
+					
+				//Tela que adiciona uma gratificação a um empregado;
 				case 4:
 					int opg;
 					boolean f = true;
-					//Tela que adiciona uma gratificação a um empregado;
 					while (f) {
 						System.out.println("[1] Hora Extra");
 						System.out.println("[2] Desempenho");
-						System.out.print("Opcao: ");
-						opg = ler.nextInt();
+						System.out.print("Opção: ");
+						
+						try {
+							leitura = ler.next();
+							for (int i = 0; i < leitura.length(); i++) {
+								Character caractere = leitura.charAt(i);
+								if (!(Character.isDigit(caractere))) {
+									throw new Exception();
+								}
+							}
+							opg = Integer.valueOf(leitura);
+						} catch (Exception erro) {
+							System.err.println("\nDigite apenas números");
+							opg = 99;
+							leitura = "erro";
+						}
+						
 						switch (opg) {
 						case 1:
-							System.out.println("------ MENU DE CADASTRO GRATIFICACAO ------");
+							System.out.println("------ MENU DE CADASTRO GRATIFICAÇÃO ------");
 
-							System.out.print("Quantidade de horas trabalhada: ");
+							System.out.print("Quantidade de horas trabalhadas: ");
 							int hora = ler.nextInt();
 
 							System.out.print("Data Trabalhada: ");
 							String data = ler.next();
 
-							ListaDeGratificacoes.adicionaGratificacao(ep, data, hora);
-							if(ListaDeGratificacoes.adicionaGratificacao(ep, data))
-								System.out.println("GRATIFICACAO ADICIONADA COM SUCESSO...");
+							if(ListaDeGratificacoes.adicionaGratificacao(ep, data, hora))
+								System.out.println("GRATIFICAÇÃO ADICIONADA");
 							f = false;
 							break;
+							
 						//Tela que irá cadastrar uma gratificação a um empregado;
 						case 2:
 							System.out.println("------ MENU DE CADASTRO ------");
@@ -282,14 +342,13 @@ public class IU {
 							System.out.print("Data Trabalhada: ");
 							String data1 = ler.next();
 
-							ListaDeGratificacoes.adicionaGratificacao(ep, data1);
 							if(ListaDeGratificacoes.adicionaGratificacao(ep, data1))
-								System.out.println("GRATIFICACAO ADICIONADA COM SUCESSO...");
-							
+								System.out.println("GRATIFICAÇÃO ADICIONADA");
 							f = false;
 							break;
 						default:
-							System.err.println("Opção inválida ...");
+							if(!leitura.equals("erro"))
+								System.out.println("\nOpção inválida, digite novamente.");
 							break;
 						}
 					}
@@ -297,27 +356,59 @@ public class IU {
 				case 5:
 
 					System.out.print("Qual o índice da gratificação: ");
-					int opg1 = ler.nextInt();
-					ListaDeGratificacoes.removeGratificacao(ep, opg1);
+					int opg1;
 					
+					try {
+						leitura = ler.next();
+						for (int i = 0; i < leitura.length(); i++) {
+							Character caractere = leitura.charAt(i);
+							if (!(Character.isDigit(caractere))) {
+								throw new Exception();
+							}
+						}
+						opg1 = Integer.valueOf(leitura);
+					} catch (Exception erro) {
+						System.err.println("\nDigite apenas números");
+						opg1 = 99;
+						leitura = "erro";
+					}
+					
+					ListaDeGratificacoes.removeGratificacao(ep, opg1);
+
 					break;
 				case 6:
 					ListaDeFuncionario.removeEmpregado(ep);
-					System.out.println("Usuário excluído com sucesso...");
 					ops = 0;
 				case 0:
 					break;
 				case 7:
-					System.out.println("Qual o índice da gratificação: ");
-					int opg2 = ler.nextInt();
+					System.out.print("Qual o índice da gratificação: ");
+					int opg2;
+					
+					try {
+						leitura = ler.next();
+						for (int i = 0; i < leitura.length(); i++) {
+							Character caractere = leitura.charAt(i);
+							if (!(Character.isDigit(caractere))) {
+								throw new Exception();
+							}
+						}
+						opg2 = Integer.valueOf(leitura);
+					} catch (Exception erro) {
+						System.err.println("\nDigite apenas números");
+						opg2 = 99;
+						leitura = "erro";
+					}
+					
 					IUAtualizaGratificacao(ep, opg2);
 					break;
 				default:
-					System.out.println("Opção inválida, digite novamente.");
+					if(!leitura.equals("erro"))
+						System.out.println("\nOpção inválida, digite novamente.");
 					break;
 				}
 
-			} while (ops != 0); //Condição para sair do laço infinito;
+			} while (ops != 0);		//Condição para sair do laço infinito;
 		}
 
 	}
@@ -325,7 +416,7 @@ public class IU {
 	//Tela que faz as ações possíveis na gratificação de um funcionário;
 	private static void IUAtualizaGratificacao(int ep, int opg2) {
 		Gratificacao g = ListaDeGratificacoes.recuperaGratificacao(ep, opg2);
-		
+
 		//Condição para testar se a lista de gratificações não é nula;
 		if (g != null) {
 			TipoGratificacao tp = g.getTipo();
@@ -334,10 +425,23 @@ public class IU {
 
 			do {
 
-				menuAtualizaGratificacao(ep, opg2, tp);
+				menuAtualizaGratificacao(tp);
 
-				opg = ler.nextInt();
-				
+				try {
+					leitura = ler.next();
+					for (int i = 0; i < leitura.length(); i++) {
+						Character caractere = leitura.charAt(i);
+						if (!(Character.isDigit(caractere))) {
+							throw new Exception();
+						}
+					}
+					opg = Integer.valueOf(leitura);
+				} catch (Exception erro) {
+					System.err.println("\nDigite apenas números");
+					opg = 99;
+					leitura = "erro";
+				}
+
 				//Tela para cadastrar uma gratificação por desempenho ou por hora_extra;
 				switch (tp) {
 				case Desempenho:
@@ -345,13 +449,13 @@ public class IU {
 					case 1:
 						System.out.print("Digite a nova data: ");
 						String data = ler.next();
-						ListaDeGratificacoes.recuperaGratificacao(ep, opg2).setDataTrabalhada(data);
-						System.out.println("ATUALIZADA COM SUCESSO...");
+						if(ListaDeGratificacoes.recuperaGratificacao(ep, opg2).setDataTrabalhada(data))
+							System.out.println("ATUALIZADA COM SUCESSO");
 						break;
 					case 0:
 						break;
 					default:
-						System.err.println("Opção Inválida");
+						System.out.println("Opção Inválida");
 						break;
 					}
 					break;
@@ -361,72 +465,160 @@ public class IU {
 						System.out.print("Digite a nova data: ");
 						String data = ler.next();
 						ListaDeGratificacoes.recuperaGratificacao(ep, opg2).setDataTrabalhada(data);
-						System.out.println("ATUALIZADA COM SUCESSO...");
+						System.out.println("ATUALIZADA COM SUCESSO");
 						break;
 					case 2:
 						System.out.print("Digite a nova hora trabalhada: ");
 						int hora = ler.nextInt();
 						ListaDeGratificacoes.recuperaGratificacao(ep, opg2)
 								.calculaGratificacao(ListaDeFuncionario.recuperaEmpregado(ep).getSalarioBase(), hora);
-						System.out.println("ATUALIZADA COM SUCESSO...");
 						break;
 					case 3:
 						System.out.print("Digite a nova data: ");
 						String data1 = ler.next();
 						ListaDeGratificacoes.recuperaGratificacao(ep, opg2).setDataTrabalhada(data1);
-						System.out.print("Digite a nova hora trabalhada: ");
+						System.out.println("Digite a nova hora trabalhada: ");
 						int hora1 = ler.nextInt();
 						ListaDeGratificacoes.recuperaGratificacao(ep, opg2)
 								.calculaGratificacao(ListaDeFuncionario.recuperaEmpregado(ep).getSalarioBase(), hora1);
-						System.out.println("ATUALIZADA COM SUCESSO...");
 						break;
 					case 0:
 						break;
 					default:
-						System.err.println("Opção inválida");
+						if(!leitura.equals("erro"))
+							System.out.println("\nOpção inválida, digite novamente.");
 						break;
 					}
 					break;
 				}
 
-			} while (opg != 0);	//Condição para sair do laço infinito;
+			} while (opg != 0);		//Condição para sair do laço infinito;
 		}
 
 	}
-	
+
 	//Interface de usuário que atualiza um funcionário;
 	private static void IUAtualizaFuncionario(Empregado e) {
 		int opsf;
 		do {
 			menuAtualizaFuncionario();
-			opsf = ler.nextInt();
+			
+			try {
+				leitura = ler.next();
+				for (int i = 0; i < leitura.length(); i++) {
+					Character caractere = leitura.charAt(i);
+					if (!(Character.isDigit(caractere))) {
+						throw new Exception();
+					}
+				}
+				opsf = Integer.valueOf(leitura);
+			} catch (Exception erro) {
+				System.err.println("\nDigite apenas números");
+				opsf = 99;
+				leitura = "erro";
+			}
+			
 			switch (opsf) {
 
 			case 1:
-				System.out.print("Novo Nome: ");
-				String nome = ler.next();
-				e.setNome(nome);
-				System.out.print("Novo Salário: ");
-				Double salario = ler.nextDouble();
-				e.setSalarioBase(salario);
+				String nome;
+				while (true) {
+					
+					//Bloco try catch para tratar a exceção caso o usuário digite algo que não seja letras; 
+					try {
+						System.out.print("Novo Nome: ");
+						nome = ler.next();
+						for (int i = 0; i < nome.length(); i++) {
+							Character caractere = nome.charAt(i);
+							if (Character.isDigit(caractere)) {
+								throw new Exception();
+							}
+						}
+						e.setNome(nome);
+						break;
+					} catch (Exception erro) {
+						System.err.println(
+								"\nErro!!\n Verifique se o nome está correto (Sem números)");
+					}
+				}
+				
+				Double salario;
+				
+				while (true) {
+					
+					//Bloco try catch para tratar a exceção caso o usuário digite algo que não seja letras; 
+					try {
+						System.out.print("Novo Salário: ");
+						leitura = ler.next();
+						for (int i = 0; i < leitura.length(); i++) {
+							Character caractere = leitura.charAt(i);
+							if (!(Character.isDigit(caractere))) {
+								throw new Exception();
+							}
+						}
+						salario = Double.valueOf(leitura);
+						e.setSalarioBase(salario);
+						break;
+					} catch (Exception erro) {
+						System.err.println("\nDigite apenas números");
+					}
+				}
+				
 				break;
 			case 2:
-				System.out.print("Novo Nome: ");
-				String nome1 = ler.next();
-				e.setNome(nome1);
+				String nome1;
+				while (true) {
+					
+					//Bloco try catch para tratar a exceção caso o usuário digite algo que não seja letras; 
+					try {
+						System.out.print("Novo Nome: ");
+						nome1 = ler.next();
+						for (int i = 0; i < nome1.length(); i++) {
+							Character caractere = nome1.charAt(i);
+							if (Character.isDigit(caractere)) {
+								throw new Exception();
+							}
+						}
+						e.setNome(nome1);
+						break;
+					} catch (Exception erro) {
+						System.err.println(
+								"\nErro!!\n Verifique se o nome está correto (Sem números)");
+					}
+				}
 				break;
 			case 3:
-				System.out.print("Novo Salário: ");
-				Double salario1 = ler.nextDouble();
-				e.setSalarioBase(salario1);
+				Double salario1;
+				
+				while (true) {
+					
+					//Bloco try catch para tratar a exceção caso o usuário digite algo que não seja letras; 
+					try {
+						System.out.print("Novo Salário: ");
+						leitura = ler.next();
+						for (int i = 0; i < leitura.length(); i++) {
+							Character caractere = leitura.charAt(i);
+							if (!(Character.isDigit(caractere))) {
+								throw new Exception();
+							}
+						}
+						salario1 = Double.valueOf(leitura);
+						e.setSalarioBase(salario1);
+						break;
+					} catch (Exception erro) {
+						System.err.println("\nDigite apenas números");
+					}
+				}
 				break;
 			case 0:
 				break;
 			default:
-				System.err.println("Opção inválida");
+				if(!leitura.equals("erro"))
+					System.out.println("\nOpção inválida, digite novamente.");
 				break;
 			}
-		} while (opsf != 0);	//Condição de saída do laço infinito;
+		} while (opsf != 0);		//Condição de saída do laço infinito;
 
 	}
-}
+
+	}

@@ -14,7 +14,7 @@ public class Main {
 		
 		//Adicionanado gratificações ao funcionário;
 		ListaDeGratificacoes.adicionaGratificacao(0, "23/04");
-		ListaDeGratificacoes.adicionaGratificacao(1, "05/05");
+		ListaDeGratificacoes.adicionaGratificacao(1, "05/05", 3);
 
 		
 		IU.IUPrincipal();
